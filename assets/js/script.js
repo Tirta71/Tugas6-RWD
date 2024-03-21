@@ -46,9 +46,16 @@ document.addEventListener("DOMContentLoaded", function () {
     if (event.target.classList.contains("hapus-pegawai")) {
       const nama = event.target.dataset.nama;
       const row = event.target.parentElement.parentElement;
+
+      const totalRowText = row.cells[7].textContent;
+
+      const cleanedTotal = totalRowText.replace(/[^\d.,]/g, "");
+
       const totalRow = parseFloat(
-        row.cells[7].textContent.replace(/[^\d.-]/g, "")
+        cleanedTotal.replace(/\./g, "").replace(",", ".")
       );
+
+      console.log(totalRow);
 
       totalGaji -= totalRow;
       updateTotalGaji();
