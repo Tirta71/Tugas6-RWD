@@ -8,6 +8,10 @@
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap4.min.css"
+    />
     <link rel="stylesheet" href="./assets/style.css" />
     <link
       rel="stylesheet"
@@ -76,8 +80,8 @@
       <br />
       <table
         id="pegawai-table"
-        class="table table-striped mt-5"
-        style="display: none"
+        class="table table-striped table-bordered"
+        style="width: 100%"
       >
         <thead>
           <tr>
@@ -97,6 +101,7 @@
           <tr>
             <td colspan="7">Total Gaji</td>
             <td id="total-gaji-amount">0</td>
+            <td></td>
           </tr>
         </tfoot>
       </table>
@@ -107,7 +112,15 @@
       </div>
     </footer>
 
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script src="./assets/js/script.js"></script>
+    <script>
+      $(document).ready(function () {
+        $("#pegawai-table").DataTable();
+      });
+    </script>
   </body>
 </html>

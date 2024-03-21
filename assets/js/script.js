@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
   const form = document.getElementById("pegawai-form");
   const tableBody = document.getElementById("pegawai-data");
-  const table = document.getElementById("pegawai-table"); // Tambahkan ini
+  const table = $("#pegawai-table").DataTable();
   let totalGaji = 0;
 
   form.addEventListener("submit", function (event) {
@@ -17,21 +17,20 @@ document.addEventListener("DOMContentLoaded", function () {
     const tunjanganKeluarga = status === "menikah" ? gajiPokok * 0.2 : 0;
     const total = gajiPokok + tunjanganJabatan + bpjs + tunjanganKeluarga;
 
-    const row = document.createElement("tr");
-    row.dataset.totalGaji = total;
-    row.innerHTML = `
-                <td>${nama}</td>
-                <td>${jabatan}</td>
-                <td>${status}</td>
-                <td>${formatCurrency(gajiPokok)}</td>
-                <td>${formatCurrency(tunjanganJabatan)}</td>
-                <td>${formatCurrency(bpjs)}</td>
-                <td>${formatCurrency(tunjanganKeluarga)}</td>
-                <td>${formatCurrency(total)}</td>
-                <td><button class="hapus-pegawai btn btn-danger" data-nama="${nama}">Hapus</button></td>
-              `;
-    tableBody.appendChild(row);
-    table.style.display = "table";
+    table.row
+      .add([
+        nama,
+        jabatan,
+        status,
+        formatCurrency(gajiPokok),
+        formatCurrency(tunjanganJabatan),
+        formatCurrency(bpjs),
+        formatCurrency(tunjanganKeluarga),
+        formatCurrency(total),
+        `<button class="hapus-pegawai btn btn-danger" data-nama="${nama}">Hapus</button>`,
+      ])
+      .draw();
+
     totalGaji += total;
     updateTotalGaji();
     form.reset();
@@ -47,12 +46,14 @@ document.addEventListener("DOMContentLoaded", function () {
     if (event.target.classList.contains("hapus-pegawai")) {
       const nama = event.target.dataset.nama;
       const row = event.target.parentElement.parentElement;
-      const totalRow = parseFloat(row.dataset.totalGaji);
+      const totalRow = parseFloat(
+        row.cells[7].textContent.replace(/[^\d.-]/g, "")
+      );
 
       totalGaji -= totalRow;
       updateTotalGaji();
 
-      row.remove();
+      table.row(row).remove().draw();
 
       Swal.fire({
         icon: "success",
