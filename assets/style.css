@@ -1,0 +1,49 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: #f8f9fa;
+  padding: 10px 0;
+  text-align: center;
+}
+.hero-section {
+  height: 80vh;
+}
+
+.nama-title {
+  font-family: "Poppins", sans-serif;
+  text-align: center;
+  margin-top: 2rem;
+  font-size: 62px;
+  font-weight: bold;
+  line-height: 24px;
+}
+
+.pekerjaan span {
+  color: #d32d20;
+}
+
+.content-hero {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.content-hero .pekerjaan {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.content-data {
+  margin-bottom: 5rem;
+}
+
+@media only screen and (max-width: 768px) {
+  .nama-title {
+    font-size: 40px;
+  }
+}
